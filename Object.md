@@ -220,7 +220,7 @@ in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
     }
 
     Object.keys(a) => ["name","age"]
-    Object.getOwnPropertyNames(a)  //Object.getOwnPrototypeName is not a function
+    Object.getOwnPropertyNames(a)  => ["name","age"]
 ```
 //函数对线
 ``` bash 
