@@ -47,6 +47,9 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
         }
     }
 ```
+#### 易错
+>* 1.1与1.2这两种函数都是直接挂在window上的，CreateObjectFn.name = 'CreateObjectFn'
+>* 正确调用方法：window.name = '函数中的name值'，其他属性同理，CreateObjectFn.message 会报错
 
 #### 差异
     1.没有在表面上创建对象
@@ -166,7 +169,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
 
 ``` bash
     function createObjectFn (name,age) {
-        
+        //这里必须是函数对象，理由：见1
     }
     createObjectFn.prototype.name = '小明';
     createObjectFn.prototype.age = 2;
@@ -191,7 +194,48 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
 //注解6
 ``` bash
     X.hasOwnProperty("name"); //true ->来自实例
-    delete X.name;
+    delete X.name; ,.x
     X.hasOwnProperty("name"); //false ->来自原型
 ```
+#### 对象中 in 操作符
+in有两种使用方式：
+>* 单独使用： "属性" in obj   -> true/false 判断属性是否在对象中（不区分属性来自实例还是原型）
+>* for - in 循环中
 
+##### 用法
+in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
+
+``` bash
+    function hasOwnPrototype (object, name){
+        return !object.hasOwnProperty( name ) && ( name in object )
+    }
+```
+
+#### 对象中 Object.keys() && Object.getOwnPropertyName() 枚举的用法
+//非函数对象
+``` bash 
+    var a = {
+        name: '小蛙',
+        age:3
+    }
+
+    Object.keys(a) => ["name","age"]
+    Object.getOwnPropertyNames(a)  //Object.getOwnPrototypeName is not a function
+```
+//函数对线
+``` bash 
+    function Person (){
+        this.sex = "男" 
+    }
+    Person.prototype.name = "小蛙"
+    Person.prototype.age = 23
+    Person.prototype.message = function (){
+        console.log(`我叫${this.name}，今年${this.age}岁`)
+    }
+    let people = new Person()
+    Object.keys(Person) -> []
+    Object.keys(people) -> ["sex"]  
+    Object.getOwnPropertyNames(Person.prototype) -> ["constructor", "name", "age", "message"]
+    Object.getOwnPropertyNames(people) -> ["sex","name"] 
+```
+> 说明Object.keys() 方法只能枚举所有不在原型prototype上的属性
