@@ -111,4 +111,4 @@ PIXI.loader
 
 ### 显示 sprite
 `app.stage.addChild(sprite) `
-__stage 是用来包裹你所有精灵的主要容器 __
+**stage 是用来包裹你所有精灵的主要容器**
