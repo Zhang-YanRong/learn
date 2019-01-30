@@ -239,3 +239,17 @@ in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
     Object.getOwnPropertyNames(people) -> ["sex","name"] 
 ```
 > 说明Object.keys() 方法只能枚举所有不在原型prototype上的属性
+
+#### 对象中 Object.assign()  将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
+``` bash
+    const object1 = {
+        a: 1,
+        b: 2,
+        c: 3
+    };
+
+    const object2 = Object.assign({c: 4, d: 5}, object1);
+
+    console.log(object2.c, object2.d);
+    // expected output: 3 5    
+```
