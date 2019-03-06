@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="pixi.min.v4.5.5.js"></script>
+    <script src="./a.js" type="module"></script>
+    <script src="./b.js" type="module"></script>
+</head>
+<style>
+    body {
+        background-color: #000000;
+    }
+
+    canvas {
+        background-color: #222;
+    }
+</style>
+
+<body onload="init();">
+    <div align="center">
+        <canvas id="game-canvas" width="512" height="384"></canvas>
+    </div>
+</body>
+<script>
+    function init() {
+        stage = new PIXI.Container();
+        renderer = PIXI.autoDetectRenderer(
+            512,
+            384, {
+                view: document.getElementById("game-canvas")
+            }
+        )
+        //加载背景图1生成纹理，并载入页面
+        var farTexture = PIXI.Texture.fromImage("./img/bg-far.png");
+        // far = new PIXI.Sprite(farTexture)
+        //
+        far = new PIXI.extras.TilingSprite(farTexture, 512, 256);
+        far.position.x = 0;
+        far.position.y = 0;
+        far.tilePosition.x = 0;
+        stage.addChild(far)
+
+        //加载背景图2生成纹理，并载入页面
+        var midTexture = PIXI.Texture.fromImage("./img/bg-mid.png");
+
+        // mid = new PIXI.Sprite(midTexture);
+
+        mid = new PIXI.extras.TilingSprite(midTexture, 512, 256);
+
+        mid.position.x = 0;
+        mid.position.y = 128;
+
+        mid.tilePosition.x = 0;
+
+        stage.addChild(mid);
+
+        //调用动画函数，执行动作
+        // requestAnimationFrame(update);
+        update()
+    }
+
+    function update() {
+        // far.position.x -= 0.128;
+        //
+        far.tilePosition.x -= 0.128;
+        mid.tilePosition.x -= 0.64;
+
+        renderer.render(stage);
+        //每秒60帧的刷新速度回调函数
+        requestAnimationFrame(update);
+    }
+</script>
+
+</html>
