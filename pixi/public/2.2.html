@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./pixi.min.v4.5.5.js"></script>
+    <script src="./far.js"></script>
+    <script src="./scroller.js"></script>
+    <script src="./main.js"></script>
+</head>
+
+<body onload="init();">
+    <canvas></canvas>
+</body>
+
+</html>
+<script>
+    // function init() {
+    //     stage = new PIXI.Container();
+    //     renderer = PIXI.autoDetectRenderer(
+    //         512,
+    //         384, {
+    //             view: document.querySelector("canvas")
+    //         }
+    //     )
+    //     scroller = new Scroller()
+    //     game()
+    // }
+
+    // function game() {
+    //     var newViewportX = scroller.getViewportX() + 5;
+    //     scroller.setViewportX(newViewportX);
+    //     renderer.render(stage)
+    //     //每秒60帧的刷新速度回调函数
+    //     requestAnimationFrame(game);
+    // }
+
+    function init() {
+        main = new Main();
+    }
+</script>

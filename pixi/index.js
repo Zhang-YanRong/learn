@@ -15,4 +15,10 @@ app.get('/2.1', function (req, res) {
     res.sendFile(fileName)
 })
 
+app.get('/2.2', function (req, res) {
+    let fileName = path.resolve('./public/2.2.html');
+    res.sendFile(fileName)
+})
+
+
 app.listen(3000)

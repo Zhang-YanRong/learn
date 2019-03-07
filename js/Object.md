@@ -119,7 +119,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
     obj.message('今年','岁') //小蛙今年15岁
     obj.message.call(str,'今年','岁') //小明今年3岁
     obj.message.apply(str,['今年','岁']) //小明今年3岁
-    obj.message.call(str,'今年','岁')() //小明今年3岁
+    obj.message.bind(str,'今年','岁')() //小明今年3岁
 ```
 
 ``` bash
@@ -222,7 +222,7 @@ in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
     Object.keys(a) => ["name","age"]
     Object.getOwnPropertyNames(a)  => ["name","age"]
 ```
-//函数对线
+//函数对象
 ``` bash 
     function Person (){
         this.sex = "男" 
