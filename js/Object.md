@@ -19,7 +19,7 @@
 ### 1.1 工厂模式
 
 #### 实现方式：
-``` bash 
+``` javascript
     function createObjectFn (name,age) {
         let a = new Object();
         a.name = name;
@@ -38,7 +38,7 @@
 
 ### 1.2 构造函数模式
 js中有原生的构造函数，如：Object、Array；此外亦可创建自定义构造函数:
-``` bash 
+``` javascript
     function CreateObjectFn (name, age) {
         this.name = name;
         this.age = age;
@@ -68,7 +68,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
 #### 特点
 //当构造函数使用
 
-``` bash 
+``` javascript
     var X = new CreateObjectFn('小蛙', 1);
     X.message(); //我叫小蛙,  今年1岁。
     
@@ -77,20 +77,20 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
 ```
 
 //作为普通函数调用
-``` bash 
+``` javascript
     CreateObjectFn('小蛙', 1);
     //指向window(所有在最外层没有挂到别的对象上的变量或属性都会默认挂在window)
     window.message(); //我叫小蛙,  今年1岁。
 ```
 //在另一个对象的作用域中调用
-``` base 
+``` javascript
     var a = new Object();
     CreateObjectFn.call(a, '小蛙', 1);
     a.message(); //我叫小蛙,  今年1岁。
 ```
 
 #### 延伸 call()、apply()、bind()
-``` bash 
+``` javascript
     var M = new CreateObjectFn('小蛙', 1);
     var other = {
         name:'猫咪',
@@ -101,7 +101,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
     M.message.bind(other)() //我叫猫咪,  今年12岁。
     注：message不加()
 ```
-``` bash
+``` javascript
     传参用法：
     var obj = {
         name:'小蛙',
@@ -122,7 +122,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
     obj.message.bind(str,'今年','岁')() //小明今年3岁
 ```
 
-``` bash
+``` javascript
     //附加bind的源码实现
     // the .bind method from prototype.js
     Function.prototype.bind = function(){
@@ -139,7 +139,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
     1.在每次实例化的时候，里面的方法都会被Function创建一遍，会多次调用Function函数
     2.多次实例化过程中创建的方法不是同一个Function的实例，所以，也就会有不同的作用域链和标识符解析
 ```
-``` bash 
+``` javascript
     //解决上述的多次实例化Function
     function CreateObjectFn (name, age) {
         this.name = name;
@@ -167,7 +167,7 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
 
 > 6.用hasOwnProperty检测是否是原型的属性,该方法是继承Object,只在给定属性存在于对象实例中时，才会返回true
 
-``` bash
+``` javascript
     function createObjectFn (name,age) {
         //这里必须是函数对象，理由：见1
     }
@@ -181,18 +181,18 @@ js中有原生的构造函数，如：Object、Array；此外亦可创建自定�
     X.message(); //我叫小明,  今年2岁。
 ```
 //注解4
-``` bash 
+``` javascript
     X.name = '小蛙';
     X.message(); //我叫小蛙,  今年2岁。
 ```
 //注解5
-``` bash
+``` javascript
     X.name = '小蛙';
     delete X.name;
     X.message(); //我叫小明,  今年2岁。
 ```
 //注解6
-``` bash
+``` javascript
     X.hasOwnProperty("name"); //true ->来自实例
     delete X.name; ,.x
     X.hasOwnProperty("name"); //false ->来自原型
@@ -205,7 +205,7 @@ in有两种使用方式：
 ##### 用法
 in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
 
-``` bash
+``` javascript
     function hasOwnPrototype (object, name){
         return !object.hasOwnProperty( name ) && ( name in object )
     }
@@ -213,7 +213,7 @@ in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
 
 #### 对象中 Object.keys() && Object.getOwnPropertyName() 枚举的用法
 //非函数对象
-``` bash 
+``` javascript
     var a = {
         name: '小蛙',
         age:3
@@ -223,7 +223,7 @@ in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
     Object.getOwnPropertyNames(a)  => ["name","age"]
 ```
 //函数对象
-``` bash 
+``` javascript
     function Person (){
         this.sex = "男" 
     }
@@ -241,7 +241,7 @@ in 与 hasOwnProperty 结合使用判断属性是来自对象还是实例
 > 说明Object.keys() 方法只能枚举所有不在原型prototype上的属性
 
 #### 对象中 Object.assign()  将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。
-``` bash
+``` javascript
     const object1 = {
         a: 1,
         b: 2,
