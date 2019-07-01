@@ -169,6 +169,41 @@
     f1.msg = 111
     console.log(f1.msg) -> 111
 
+```
+``` javascript
+        var Vue = function () {}
+
+    let data = {
+        name: '',
+        age: ''
+    }
+    Object.keys(data).forEach(v => {
+        Vue[v] = ''
+        init(v)
+    })
+
+    function init(x) {
+        let str = '_' + x
+        Object.defineProperty(Vue.prototype, str, {
+            get: function () {
+                return this[x]
+            },
+            set: function (value) {
+                this[x] = value
+            }
+        })
+    }
+
+    var vue = new Vue()
+    vue.name = '笑话'
+    console.log(vue)
+    ->
+    Vue {name: "笑话"}
+        name: "笑话"
+        _age: undefined
+        _name: "笑话"
+        __proto__: Object
+    
 
 ```
 
