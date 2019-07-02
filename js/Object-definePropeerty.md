@@ -171,7 +171,7 @@
 
 ```
 ``` javascript
-        var Vue = function () {}
+     var Vue = function () {}
 
     let data = {
         name: '',
